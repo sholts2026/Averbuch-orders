@@ -1,5 +1,4 @@
 
-
 import { useState, useEffect } from "react";
 
 const CATALOG = [
@@ -62,14 +61,7 @@ const CATALOG = [
 ];
 
 const AGENTS = [
-  { id: "avi",    name: "אבי כהן",    phone: "972501111111" },
-  { id: "michal", name: "מיכל לוי",   phone: "972502222222" },
-  { id: "dani",   name: "דני שמש",    phone: "972503333333" },
-  { id: "noa",    name: "נועה ברק",   phone: "972504444444" },
-  { id: "ron",    name: "רון אלוני",  phone: "972505555555" },
-  { id: "shira",  name: "שירה גולן",  phone: "972506666666" },
-  { id: "yossi",  name: "יוסי מזרחי", phone: "972507777777" },
-  { id: "tamar",  name: "תמר שפירא",  phone: "972508888888" },
+  { id: "shani", name: "שני", phone: "972538377364" },
 ];
 
 const STEPS = ["קטגוריה", "מוצרים", "סיכום"];
@@ -117,7 +109,7 @@ export default function App() {
 
   const submit = () => {
     if (!validate()) return;
-    const phone = agent?.phone || "972500000000";
+    const phone = agent?.phone || "972538377364";
     const lines = [
       `🔩 *הזמנה חדשה – אברבוך פרזול*`, ``,
       `👤 *לקוח:* ${clientName}`,
@@ -165,7 +157,6 @@ export default function App() {
           </div>
         )}
       </div>
-
       <div style={{background:"#fff",borderBottom:"1px solid #eee",display:"flex",padding:"0 16px"}}>
         {STEPS.map((s,i) => (
           <div key={s} onClick={() => i < step && setStep(i)}
@@ -177,9 +168,7 @@ export default function App() {
           </div>
         ))}
       </div>
-
       <div style={{maxWidth:620,margin:"0 auto",padding:"20px 14px 80px"}}>
-
         {step === 0 && (
           <div>
             <h2 style={{fontSize:"1.1rem",fontWeight:700,marginBottom:16}}>בחר קטגוריה</h2>
@@ -200,7 +189,6 @@ export default function App() {
             </div>
           </div>
         )}
-
         {step === 1 && cat && (
           <div>
             <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
@@ -240,7 +228,6 @@ export default function App() {
             </div>
           </div>
         )}
-
         {step === 2 && (
           <div>
             <h2 style={{fontSize:"1.1rem",fontWeight:700,marginBottom:16}}>סיכום הזמנה</h2>
