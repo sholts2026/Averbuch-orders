@@ -286,7 +286,7 @@ export default function App() {
       discount > 0 ? `💸 *הנחה:* ${discount}%` : ``,
       agent ? `🧑‍💼 *סוכן:* ${agent.name}` : ``,
       ``, `*פריטים:*`,
-      ...cartItems.map(p => `• ${p.id} ${p.name}  ×${p.qty}  ₪${(p.finalPrice * p.qty).toLocaleString("he-IL")}`),
+      ...cartItems.map(p => `• מק"ט: ${p.id} | ${p.name}  ×${p.qty}  ₪${(p.finalPrice * p.qty).toLocaleString("he-IL")}`),
       ``, `💰 *סה"כ: ₪${cartTotal.toLocaleString("he-IL")}*`,
       notes ? `📝 *הערות:* ${notes}` : ``,
     ].filter(Boolean);
