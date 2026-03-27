@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 
 const SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTUMzCB6SQxSxoaB_yWphf4M7frk78IHxjAJJZixVrVziUxS8qEQcwjLeCcI1Rw7WUnMqoy9snxyWa0/pub?gid=0&single=true&output=csv";
 
-
 const MERIVO_CATALOG = [
   {
-    id: "merivo-m-low", name: "מריוו — מגירה נמוכה M", icon: "📦",
-    dualPrice: true,
+    id: "merivo-m-low", name: "מגירה נמוכה M", icon: "📦", dualPrice: true,
     products: [
       { id: "MR400M-W",       name: "מריוובוקס עומק 40 לבן M",           priceNagar: 175, priceSocher: 160, unit: "יח'" },
       { id: "MR400M-G",       name: "מריוובוקס עומק 40 גרפיט M",         priceNagar: 175, priceSocher: 160, unit: "יח'" },
@@ -23,8 +21,7 @@ const MERIVO_CATALOG = [
     ]
   },
   {
-    id: "merivo-gallery", name: "מריוו — מגירה גלריה", icon: "📦",
-    dualPrice: true,
+    id: "merivo-gallery", name: "מגירה גלריה", icon: "📦", dualPrice: true,
     products: [
       { id: "MR450GALLERY-W",      name: "מריוובוקס גלריה עומק 45 לבן",           priceNagar: 205, priceSocher: 190, unit: "יח'" },
       { id: "MR450GALLERY-G",      name: "מריוובוקס גלריה עומק 45 גרפיט",         priceNagar: 205, priceSocher: 190, unit: "יח'" },
@@ -39,8 +36,7 @@ const MERIVO_CATALOG = [
     ]
   },
   {
-    id: "merivo-metal", name: "מריוו — דופן מתכת כפולה", icon: "📦",
-    dualPrice: true,
+    id: "merivo-metal", name: "דופן מתכת כפולה", icon: "📦", dualPrice: true,
     products: [
       { id: "MR400-P-W",      name: "מריוובוקס מתכת עומק 40 לבן",           priceNagar: 225, priceSocher: 210, unit: "יח'" },
       { id: "MR400-P-G",      name: "מריוובוקס מתכת עומק 40 גרפיט",         priceNagar: 225, priceSocher: 210, unit: "יח'" },
@@ -56,8 +52,7 @@ const MERIVO_CATALOG = [
     ]
   },
   {
-    id: "merivo-glass", name: "מריוו — דופן זכוכית", icon: "🪟",
-    dualPrice: true,
+    id: "merivo-glass", name: "דופן זכוכית", icon: "🪟", dualPrice: true,
     products: [
       { id: "MR450GLASS-W",      name: "מריוובוקס זכוכית עומק 45 לבן",           priceNagar: 245, priceSocher: 220, unit: "יח'" },
       { id: "MR450GLASS-G",      name: "מריוובוקס זכוכית עומק 45 גרפיט",         priceNagar: 245, priceSocher: 220, unit: "יח'" },
@@ -72,28 +67,26 @@ const MERIVO_CATALOG = [
     ]
   },
   {
-    id: "merivo-accessories", name: "מריוו — אביזרים נלווים", icon: "🔩",
-    dualPrice: true,
+    id: "merivo-accessories", name: "אביזרים נלווים", icon: "🔩", dualPrice: true,
     products: [
-      { id: "ZI4.4ES1OG",    name: "מתאם לחזית זכוכית MERIVO גרפיט",        priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.4ES1SW",    name: "מתאם לחזית זכוכית MERIVO לבן",          priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.2ES1OG",    name: "מתאם לחזית מוט מקשר MERIVO גרפיט",     priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.2ES1SW",    name: "מתאם לחזית מוט מקשר MERIVO לבן",       priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.0MS1OG",    name: "מתאם לחזית נמוכה MERIVO גרפיט",        priceNagar: 100, priceSocher: 100, unit: "יח'" },
-      { id: "ZI4.0MS1SW",    name: "מתאם לחזית נמוכה MERIVO לבן",          priceNagar: 100, priceSocher: 100, unit: "יח'" },
-      { id: "ZV4.1042NNOG",  name: "פרופיל חזית זכוכית מריוובוקס גרפיט",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZV4.1042NNSW",  name: "פרופיל חזית זכוכית מריוובוקס לבן",     priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZV4.1042MOG",   name: "פרופיל חזית פנימית מריוובוקס גרפיט",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZV4.1042MSW",   name: "פרופיל חזית פנימית מריוובוקס לבן",     priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZE4H1058G.KL",  name: "חזית זכוכית MERIVOBOX",                priceNagar: 100, priceSocher: 100, unit: "יח'" },
-      { id: "ZR4.1059UOG-M", name: "מוט מקשר MERIVOBOX גרפיט",            priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
-      { id: "ZR4.1059USW-M", name: "מוט מקשר MERIVOBOX לבן",              priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
+      { id: "ZI4.4ES1OG",    name: "מתאם לחזית זכוכית MERIVO גרפיט",      priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.4ES1SW",    name: "מתאם לחזית זכוכית MERIVO לבן",        priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.2ES1OG",    name: "מתאם לחזית מוט מקשר MERIVO גרפיט",   priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.2ES1SW",    name: "מתאם לחזית מוט מקשר MERIVO לבן",     priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.0MS1OG",    name: "מתאם לחזית נמוכה MERIVO גרפיט",      priceNagar: 100, priceSocher: 100, unit: "יח'" },
+      { id: "ZI4.0MS1SW",    name: "מתאם לחזית נמוכה MERIVO לבן",        priceNagar: 100, priceSocher: 100, unit: "יח'" },
+      { id: "ZV4.1042NNOG",  name: "פרופיל חזית זכוכית מריוובוקס גרפיט", priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZV4.1042NNSW",  name: "פרופיל חזית זכוכית מריוובוקס לבן",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZV4.1042MOG",   name: "פרופיל חזית פנימית מריוובוקס גרפיט", priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZV4.1042MSW",   name: "פרופיל חזית פנימית מריוובוקס לבן",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZE4H1058G.KL",  name: "חזית זכוכית MERIVOBOX",              priceNagar: 100, priceSocher: 100, unit: "יח'" },
+      { id: "ZR4.1059UOG-M", name: "מוט מקשר MERIVOBOX גרפיט",          priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
+      { id: "ZR4.1059USW-M", name: "מוט מקשר MERIVOBOX לבן",            priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
     ]
   },
 ];
 
-const CATALOG = [
-  ...MERIVO_CATALOG,
+const LEGRABOX_CATALOG = [
   {
     id: "white-c", name: "לבן — דופן C", icon: "⬜",
     products: [
@@ -271,7 +264,7 @@ const CATALOG = [
     ]
   },
   {
-    id: "accessories", name: "אביזרים וחזיתות", icon: "🔩",
+    id: "lg-accessories", name: "אביזרים וחזיתות", icon: "🔩",
     products: [
       { id: "ZV7.1043C01-OGM", name: "פרופיל לחזית גרפיט LEGRABOX", price: 124, unit: "יח'" },
       { id: "Zi7.0Ks0-OGM", name: "זוג מתאם לחזית K גרפיט LEGRABOX", price: 126, unit: "יח'" },
@@ -292,11 +285,14 @@ const CATALOG = [
   },
 ];
 
+const BRANDS = [
+  { id: "merivobox", name: "MERIVOBOX", icon: "📦", subCategories: MERIVO_CATALOG },
+  { id: "legrabox",  name: "LEGRABOX",  icon: "🗂️", subCategories: LEGRABOX_CATALOG },
+];
+
 const AGENTS = [
   { id: "shani", name: "שני", phone: "972538377364" },
 ];
-
-const STEPS = ["התחברות", "קטגוריה", "מוצרים", "סיכום"];
 
 function applyDiscount(price, discount) {
   return Math.round(price * (1 - discount / 100));
@@ -312,6 +308,7 @@ function parseCSV(text) {
 
 export default function App() {
   const [step, setStep] = useState(0);
+  const [activeBrand, setActiveBrand] = useState(null);
   const [activeCat, setActiveCat] = useState(null);
   const [cart, setCart] = useState({});
   const [notes, setNotes] = useState("");
@@ -340,30 +337,27 @@ export default function App() {
     const found = customers.find(c => c.phone.replace(/[-\s]/g, "") === clean);
     setTimeout(() => {
       setLoading(false);
-      if (found) {
-        setCustomer(found);
-        setStep(1);
-      } else {
-        setLoginError("מספר הטלפון לא נמצא במערכת. פנה לסוכן שלך.");
-      }
+      if (found) { setCustomer(found); setStep(1); }
+      else setLoginError("מספר הטלפון לא נמצא במערכת. פנה לסוכן שלך.");
     }, 800);
   };
 
   const discount = customer?.discount || 0;
+  const customerType = customer?.type || "נגר";
+
   const getPrice = (p, cat) => {
-    let basePrice = p.price;
     if (cat && cat.dualPrice) {
-      basePrice = customer?.type === "סוחר" ? p.priceSocher : p.priceNagar;
+      return customerType === "סוחר" ? p.priceSocher : p.priceNagar;
     }
-    return applyDiscount(basePrice, discount);
+    return applyDiscount(p.price, discount);
   };
 
+  const allProducts = BRANDS.flatMap(b => b.subCategories.flatMap(c => c.products.map(p => ({ ...p, cat: c }))));
   const cartCount = Object.values(cart).reduce((s, q) => s + q, 0);
-  const cartTotal = CATALOG.flatMap(c => c.products)
-    .reduce((s, p) => s + (cart[p.id] || 0) * getPrice(p, CATALOG.find(c2 => c2.products.some(p2 => p2.id === p.id))), 0);
-  const cartItems = CATALOG.flatMap(c =>
-    c.products.filter(p => cart[p.id]).map(p => ({ ...p, qty: cart[p.id], cat: c.name, finalPrice: getPrice(p, c) }))
-  );
+  const cartTotal = allProducts.reduce((s, p) => s + (cart[p.id] || 0) * getPrice(p, p.cat), 0);
+  const cartItems = allProducts.filter(p => cart[p.id]).map(p => ({
+    ...p, qty: cart[p.id], catName: p.cat.name, finalPrice: getPrice(p, p.cat)
+  }));
 
   const setQty = (pid, delta) => {
     setCart(prev => {
@@ -380,7 +374,6 @@ export default function App() {
       `🔩 *הזמנה חדשה – אברבוך פרזול*`, ``,
       `👤 *לקוח:* ${customer?.name || phoneInput}`,
       `📞 *טלפון:* ${phoneInput}`,
-      discount > 0 ? `💸 *הנחה:* ${discount}%` : ``,
       agent ? `🧑‍💼 *סוכן:* ${agent.name}` : ``,
       ``, `*פריטים:*`,
       ...cartItems.map(p => `• מק"ט: ${p.id} | ${p.name}  ×${p.qty}  ₪${(p.finalPrice * p.qty).toLocaleString("he-IL")}`),
@@ -391,7 +384,8 @@ export default function App() {
     setTimeout(() => window.open(`https://wa.me/${phone}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank"), 500);
   };
 
-  const cat = CATALOG.find(c => c.id === activeCat);
+  const brand = BRANDS.find(b => b.id === activeBrand);
+  const cat = brand?.subCategories.find(c => c.id === activeCat);
 
   if (submitted) return (
     <div style={{fontFamily:"sans-serif",direction:"rtl",background:"#f5f5f0",minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
@@ -419,28 +413,15 @@ export default function App() {
       <div style={{background:"#1c1c1c",color:"#fff",padding:"0 16px",height:52,display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:50}}>
         <span style={{fontWeight:700}}>🔩 אברבוך פרזול {customer && <span style={{fontSize:"0.75rem",opacity:0.7}}>· {customer.name}</span>}</span>
         {cartCount > 0 && step > 1 && (
-          <div onClick={() => setStep(3)} style={{background:"#d4a017",color:"#1c1c1c",borderRadius:20,padding:"4px 12px",cursor:"pointer",fontWeight:700,fontSize:"0.85rem"}}>
+          <div onClick={() => setStep(4)} style={{background:"#d4a017",color:"#1c1c1c",borderRadius:20,padding:"4px 12px",cursor:"pointer",fontWeight:700,fontSize:"0.85rem"}}>
             🛒 {cartCount} · ₪{cartTotal.toLocaleString("he-IL")}
           </div>
         )}
       </div>
 
-      {step > 0 && (
-        <div style={{background:"#fff",borderBottom:"1px solid #eee",display:"flex",padding:"0 16px"}}>
-          {["קטגוריה","מוצרים","סיכום"].map((s,i) => (
-            <div key={s} onClick={() => i+1 < step && setStep(i+1)}
-              style={{flex:1,textAlign:"center",padding:"11px 0",fontSize:"0.8rem",fontWeight:step===i+1?700:400,
-                color:step===i+1?"#d4a017":i+1<step?"#555":"#ccc",
-                borderBottom:step===i+1?"2.5px solid #d4a017":"2.5px solid transparent",cursor:i+1<step?"pointer":"default"}}>
-              <span style={{background:step>=i+1?(step===i+1?"#d4a017":"#555"):"#ddd",color:"#fff",borderRadius:"50%",width:18,height:18,display:"inline-flex",alignItems:"center",justifyContent:"center",fontSize:"0.7rem",fontWeight:700,marginLeft:5}}>{i+1}</span>
-              {s}
-            </div>
-          ))}
-        </div>
-      )}
-
       <div style={{maxWidth:620,margin:"0 auto",padding:"20px 14px 80px"}}>
 
+        {/* STEP 0 — התחברות */}
         {step === 0 && (
           <div style={{maxWidth:380,margin:"40px auto"}}>
             <div style={{textAlign:"center",marginBottom:28}}>
@@ -463,36 +444,72 @@ export default function App() {
           </div>
         )}
 
+        {/* STEP 1 — בחירת מותג */}
         {step === 1 && (
           <div>
-            {discount > 0 && (
-              <div style={{background:"#fff8e1",border:"1px solid #d4a017",borderRadius:10,padding:"10px 14px",marginBottom:16,fontSize:"0.88rem",color:"#b8860b",fontWeight:600}}>
-                🎉 ההנחה שלך: {discount}% — המחירים מוצגים כבר אחרי הנחה!
-              </div>
-            )}
-            <h2 style={{fontSize:"1.1rem",fontWeight:700,marginBottom:16}}>בחר קטגוריה</h2>
-            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-              {CATALOG.map(c => (
-                <div key={c.id} onClick={() => { setActiveCat(c.id); setStep(2); }}
-                  style={{background:"#fff",border:`1.5px solid ${c.products.some(p=>cart[p.id])?"#d4a017":"#e8e8e8"}`,borderRadius:12,padding:"16px 12px",cursor:"pointer",textAlign:"center"}}>
-                  <div style={{fontSize:"1.6rem",marginBottom:5}}>{c.icon}</div>
-                  <div style={{fontWeight:600,fontSize:"0.85rem",lineHeight:1.3}}>{c.name}</div>
-                  <div style={{fontSize:"0.7rem",color:"#aaa",marginTop:3}}>{c.products.length} מוצרים</div>
-                  {c.products.some(p=>cart[p.id]) && (
-                    <div style={{marginTop:5,background:"#fff8e1",color:"#d4a017",borderRadius:20,padding:"2px 8px",fontSize:"0.68rem",fontWeight:700,display:"inline-block"}}>
-                      {c.products.filter(p=>cart[p.id]).length} נבחרו ✓
-                    </div>
-                  )}
-                </div>
-              ))}
+            <h2 style={{fontSize:"1.1rem",fontWeight:700,marginBottom:4}}>בחר קטלוג</h2>
+            <p style={{fontSize:"0.82rem",color:"#888",marginBottom:18}}>כל המחירים המוצגים הם מחירי נטו</p>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+              {BRANDS.map(b => {
+                const totalInCart = b.subCategories.flatMap(c => c.products).filter(p => cart[p.id]).length;
+                return (
+                  <div key={b.id} onClick={() => { setActiveBrand(b.id); setStep(2); }}
+                    style={{background:"#fff",border:`1.5px solid ${totalInCart>0?"#d4a017":"#e8e8e8"}`,borderRadius:14,padding:"28px 16px",cursor:"pointer",textAlign:"center"}}>
+                    <div style={{fontSize:"2.4rem",marginBottom:10}}>{b.icon}</div>
+                    <div style={{fontWeight:700,fontSize:"1.1rem"}}>{b.name}</div>
+                    <div style={{fontSize:"0.72rem",color:"#aaa",marginTop:4}}>{b.subCategories.length} קטגוריות</div>
+                    {totalInCart > 0 && (
+                      <div style={{marginTop:8,background:"#fff8e1",color:"#d4a017",borderRadius:20,padding:"2px 10px",fontSize:"0.72rem",fontWeight:700,display:"inline-block"}}>
+                        {totalInCart} פריטים ✓
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
 
-        {step === 2 && cat && (
+        {/* STEP 2 — קטגוריות */}
+        {step === 2 && brand && (
+          <div>
+            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
+              <button onClick={() => setStep(1)} style={{background:"none",border:"none",fontSize:"1.2rem",cursor:"pointer"}}>→</button>
+              <span style={{fontSize:"1.2rem"}}>{brand.icon}</span>
+              <h2 style={{fontSize:"1.05rem",fontWeight:700}}>{brand.name}</h2>
+            </div>
+            <p style={{fontSize:"0.82rem",color:"#888",marginBottom:14,paddingRight:36}}>כל המחירים הם מחירי נטו</p>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+              {brand.subCategories.map(c => {
+                const inCart = c.products.filter(p => cart[p.id]).length;
+                return (
+                  <div key={c.id} onClick={() => { setActiveCat(c.id); setStep(3); }}
+                    style={{background:"#fff",border:`1.5px solid ${inCart>0?"#d4a017":"#e8e8e8"}`,borderRadius:12,padding:"16px 12px",cursor:"pointer",textAlign:"center"}}>
+                    <div style={{fontSize:"1.6rem",marginBottom:5}}>{c.icon}</div>
+                    <div style={{fontWeight:600,fontSize:"0.85rem",lineHeight:1.3}}>{c.name}</div>
+                    <div style={{fontSize:"0.7rem",color:"#aaa",marginTop:3}}>{c.products.length} מוצרים</div>
+                    {inCart > 0 && (
+                      <div style={{marginTop:5,background:"#fff8e1",color:"#d4a017",borderRadius:20,padding:"2px 8px",fontSize:"0.68rem",fontWeight:700,display:"inline-block"}}>
+                        {inCart} נבחרו ✓
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            {cartCount > 0 && (
+              <button onClick={() => setStep(4)} style={{width:"100%",marginTop:16,background:"#1c1c1c",color:"#fff",border:"none",borderRadius:9,padding:"13px",fontFamily:"inherit",fontSize:"0.95rem",fontWeight:700,cursor:"pointer"}}>
+                לסיכום ({cartCount} פריטים) →
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* STEP 3 — מוצרים */}
+        {step === 3 && cat && (
           <div>
             <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
-              <button onClick={() => setStep(1)} style={{background:"none",border:"none",fontSize:"1.2rem",cursor:"pointer"}}>→</button>
+              <button onClick={() => setStep(2)} style={{background:"none",border:"none",fontSize:"1.2rem",cursor:"pointer"}}>→</button>
               <span style={{fontSize:"1.2rem"}}>{cat.icon}</span>
               <h2 style={{fontSize:"1.05rem",fontWeight:700}}>{cat.name}</h2>
             </div>
@@ -504,10 +521,9 @@ export default function App() {
                   <div key={p.id} style={{background:"#fff",border:`1.5px solid ${qty>0?"#d4a017":"#e8e8e8"}`,borderRadius:11,padding:"12px 14px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                     <div style={{flex:1}}>
                       <div style={{fontWeight:600,fontSize:"0.88rem"}}>{p.name}</div>
-                      <div style={{fontSize:"0.76rem",color:"#888",marginTop:2,display:"flex",gap:8,alignItems:"center"}}>
+                      <div style={{fontSize:"0.76rem",color:"#888",marginTop:2,display:"flex",gap:6,alignItems:"center"}}>
                         <span style={{fontWeight:700,color:"#1c1c1c"}}>₪{finalPrice}</span>
-                        {discount > 0 && <span style={{color:"#bbb",textDecoration:"line-through"}}>₪{p.price}</span>}
-                        <span style={{color:"#aaa"}}>/ {p.unit}</span>
+                        <span style={{color:"#bbb"}}>נטו / {p.unit}</span>
                       </div>
                     </div>
                     <div style={{display:"flex",alignItems:"center",gap:8,flexShrink:0}}>
@@ -516,7 +532,7 @@ export default function App() {
                         <span style={{minWidth:22,textAlign:"center",fontWeight:700}}>{qty}</span>
                         <button onClick={() => setQty(p.id,1)} style={{width:28,height:28,borderRadius:"50%",border:"none",background:"#d4a017",cursor:"pointer",fontWeight:700,color:"#fff",fontSize:"1rem"}}>+</button>
                       </> : (
-                        <button onClick={() => setQty(p.id,1)} style={{background:"#1c1c1c",color:"#fff",border:"none",borderRadius:7,padding:"6px 12px",cursor:"pointer",fontWeight:600,fontSize:"0.8rem",whiteSpace:"nowrap"}}>+ הוסף</button>
+                        <button onClick={() => setQty(p.id,1)} style={{background:"#1c1c1c",color:"#fff",border:"none",borderRadius:7,padding:"6px 12px",cursor:"pointer",fontWeight:600,fontSize:"0.8rem"}}>+ הוסף</button>
                       )}
                     </div>
                   </div>
@@ -524,9 +540,9 @@ export default function App() {
               })}
             </div>
             <div style={{display:"flex",gap:9}}>
-              <button onClick={() => setStep(1)} style={{flex:1,background:"#f5f5f0",border:"1.5px solid #ddd",borderRadius:9,padding:"11px",fontFamily:"inherit",fontSize:"0.9rem",fontWeight:600,cursor:"pointer",color:"#555"}}>← קטגוריות</button>
+              <button onClick={() => setStep(2)} style={{flex:1,background:"#f5f5f0",border:"1.5px solid #ddd",borderRadius:9,padding:"11px",fontFamily:"inherit",fontSize:"0.9rem",fontWeight:600,cursor:"pointer",color:"#555"}}>← קטגוריות</button>
               {cartCount > 0 && (
-                <button onClick={() => setStep(3)} style={{flex:2,background:"#1c1c1c",color:"#fff",border:"none",borderRadius:9,padding:"11px",fontFamily:"inherit",fontSize:"0.9rem",fontWeight:700,cursor:"pointer"}}>
+                <button onClick={() => setStep(4)} style={{flex:2,background:"#1c1c1c",color:"#fff",border:"none",borderRadius:9,padding:"11px",fontFamily:"inherit",fontSize:"0.9rem",fontWeight:700,cursor:"pointer"}}>
                   לסיכום ({cartCount}) →
                 </button>
               )}
@@ -534,7 +550,8 @@ export default function App() {
           </div>
         )}
 
-        {step === 3 && (
+        {/* STEP 4 — סיכום */}
+        {step === 4 && (
           <div>
             <h2 style={{fontSize:"1.1rem",fontWeight:700,marginBottom:16}}>סיכום הזמנה</h2>
             {cartItems.length > 0 ? (
@@ -543,7 +560,7 @@ export default function App() {
                   <div key={p.id} style={{display:"flex",alignItems:"center",padding:"11px 14px",borderBottom:i<cartItems.length-1?"1px solid #f0f0f0":"none"}}>
                     <div style={{flex:1}}>
                       <div style={{fontSize:"0.88rem",fontWeight:600}}>{p.name}</div>
-                      <div style={{fontSize:"0.72rem",color:"#aaa"}}>{p.cat} · ₪{p.finalPrice}/{p.unit}</div>
+                      <div style={{fontSize:"0.72rem",color:"#aaa"}}>{p.catName} · ₪{p.finalPrice} נטו/{p.unit}</div>
                     </div>
                     <div style={{display:"flex",alignItems:"center",gap:7,flexShrink:0}}>
                       <button onClick={() => setQty(p.id,-1)} style={{width:24,height:24,borderRadius:"50%",border:"1.5px solid #ddd",background:"#f5f5f0",cursor:"pointer",fontSize:"0.85rem"}}>−</button>
@@ -554,7 +571,7 @@ export default function App() {
                   </div>
                 ))}
                 <div style={{background:"#f9f6ef",padding:"12px 14px",display:"flex",justifyContent:"space-between",fontWeight:700,fontSize:"1rem"}}>
-                  <span>סה"כ</span>
+                  <span>סה"כ נטו</span>
                   <span style={{color:"#d4a017"}}>₪{cartTotal.toLocaleString("he-IL")}</span>
                 </div>
               </div>
@@ -578,6 +595,7 @@ export default function App() {
             </div>
           </div>
         )}
+
       </div>
     </div>
   );
