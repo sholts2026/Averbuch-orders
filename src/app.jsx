@@ -2,7 +2,98 @@ import { useState, useEffect } from "react";
 
 const SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTUMzCB6SQxSxoaB_yWphf4M7frk78IHxjAJJZixVrVziUxS8qEQcwjLeCcI1Rw7WUnMqoy9snxyWa0/pub?gid=0&single=true&output=csv";
 
+
+const MERIVO_CATALOG = [
+  {
+    id: "merivo-m-low", name: "מריוו — מגירה נמוכה M", icon: "📦",
+    dualPrice: true,
+    products: [
+      { id: "MR400M-W",       name: "מריוובוקס עומק 40 לבן M",           priceNagar: 175, priceSocher: 160, unit: "יח'" },
+      { id: "MR400M-G",       name: "מריוובוקס עומק 40 גרפיט M",         priceNagar: 175, priceSocher: 160, unit: "יח'" },
+      { id: "MR450-M-W",      name: "מריוובוקס עומק 45 לבן M",           priceNagar: 175, priceSocher: 160, unit: "יח'" },
+      { id: "MR450-M-G",      name: "מריוובוקס עומק 45 גרפיט M",         priceNagar: 175, priceSocher: 160, unit: "יח'" },
+      { id: "MR500-M-W",      name: "מריוובוקס עומק 50 לבן M",           priceNagar: 175, priceSocher: 160, unit: "יח'" },
+      { id: "MR500-M-G",      name: "מריוובוקס עומק 50 גרפיט M",         priceNagar: 175, priceSocher: 160, unit: "יח'" },
+      { id: "MR550-M-W",      name: "מריוובוקס עומק 55 לבן M",           priceNagar: 180, priceSocher: 170, unit: "יח'" },
+      { id: "MR550-M-G",      name: "מריוובוקס עומק 55 גרפיט M",         priceNagar: 180, priceSocher: 170, unit: "יח'" },
+      { id: "MR500-M-W-70KG", name: "מריוובוקס עומק 50 לבן M — 70kg",   priceNagar: 200, priceSocher: 185, unit: "יח'" },
+      { id: "MR500-M-G-70KG", name: "מריוובוקס עומק 50 גרפיט M — 70kg", priceNagar: 200, priceSocher: 185, unit: "יח'" },
+      { id: "MR550-M-W-70KG", name: "מריוובוקס עומק 55 לבן M — 70kg",   priceNagar: 205, priceSocher: 195, unit: "יח'" },
+      { id: "MR550-M-G-70KG", name: "מריוובוקס עומק 55 גרפיט M — 70kg", priceNagar: 205, priceSocher: 195, unit: "יח'" },
+    ]
+  },
+  {
+    id: "merivo-gallery", name: "מריוו — מגירה גלריה", icon: "📦",
+    dualPrice: true,
+    products: [
+      { id: "MR450GALLERY-W",      name: "מריוובוקס גלריה עומק 45 לבן",           priceNagar: 205, priceSocher: 190, unit: "יח'" },
+      { id: "MR450GALLERY-G",      name: "מריוובוקס גלריה עומק 45 גרפיט",         priceNagar: 205, priceSocher: 190, unit: "יח'" },
+      { id: "MR500GALLERY-W",      name: "מריוובוקס גלריה עומק 50 לבן",           priceNagar: 205, priceSocher: 190, unit: "יח'" },
+      { id: "MR500GALLERY-G",      name: "מריוובוקס גלריה עומק 50 גרפיט",         priceNagar: 205, priceSocher: 190, unit: "יח'" },
+      { id: "MR550GALLERY-W",      name: "מריוובוקס גלריה עומק 55 לבן",           priceNagar: 210, priceSocher: 200, unit: "יח'" },
+      { id: "MR550GALLERY-G",      name: "מריוובוקס גלריה עומק 55 גרפיט",         priceNagar: 210, priceSocher: 200, unit: "יח'" },
+      { id: "MR500GALLERY-W-70KG", name: "מריוובוקס גלריה עומק 50 לבן — 70kg",   priceNagar: 230, priceSocher: 215, unit: "יח'" },
+      { id: "MR500GALLERY-G-70KG", name: "מריוובוקס גלריה עומק 50 גרפיט — 70kg", priceNagar: 230, priceSocher: 215, unit: "יח'" },
+      { id: "MR550GALLERY-W-70KG", name: "מריוובוקס גלריה עומק 55 לבן — 70kg",   priceNagar: 235, priceSocher: 225, unit: "יח'" },
+      { id: "MR550GALLERY-G-70KG", name: "מריוובוקס גלריה עומק 55 גרפיט — 70kg", priceNagar: 235, priceSocher: 225, unit: "יח'" },
+    ]
+  },
+  {
+    id: "merivo-metal", name: "מריוו — דופן מתכת כפולה", icon: "📦",
+    dualPrice: true,
+    products: [
+      { id: "MR400-P-W",      name: "מריוובוקס מתכת עומק 40 לבן",           priceNagar: 225, priceSocher: 210, unit: "יח'" },
+      { id: "MR400-P-G",      name: "מריוובוקס מתכת עומק 40 גרפיט",         priceNagar: 225, priceSocher: 210, unit: "יח'" },
+      { id: "MR450-P-G",      name: "מריוובוקס מתכת עומק 45 גרפיט",         priceNagar: 225, priceSocher: 210, unit: "יח'" },
+      { id: "MR500-P-W",      name: "מריוובוקס מתכת עומק 50 לבן",           priceNagar: 225, priceSocher: 210, unit: "יח'" },
+      { id: "MR500-P-G",      name: "מריוובוקס מתכת עומק 50 גרפיט",         priceNagar: 225, priceSocher: 210, unit: "יח'" },
+      { id: "MR550-P-W",      name: "מריוובוקס מתכת עומק 55 לבן",           priceNagar: 230, priceSocher: 220, unit: "יח'" },
+      { id: "MR550-P-G",      name: "מריוובוקס מתכת עומק 55 גרפיט",         priceNagar: 230, priceSocher: 220, unit: "יח'" },
+      { id: "MR500-P-W-70KG", name: "מריוובוקס מתכת עומק 50 לבן — 70kg",   priceNagar: 250, priceSocher: 245, unit: "יח'" },
+      { id: "MR500-P-G-70KG", name: "מריוובוקס מתכת עומק 50 גרפיט — 70kg", priceNagar: 250, priceSocher: 245, unit: "יח'" },
+      { id: "MR550-P-W-70KG", name: "מריוובוקס מתכת עומק 55 לבן — 70kg",   priceNagar: 255, priceSocher: 255, unit: "יח'" },
+      { id: "MR550-P-G-70KG", name: "מריוובוקס מתכת עומק 55 גרפיט — 70kg", priceNagar: 255, priceSocher: 255, unit: "יח'" },
+    ]
+  },
+  {
+    id: "merivo-glass", name: "מריוו — דופן זכוכית", icon: "🪟",
+    dualPrice: true,
+    products: [
+      { id: "MR450GLASS-W",      name: "מריוובוקס זכוכית עומק 45 לבן",           priceNagar: 245, priceSocher: 220, unit: "יח'" },
+      { id: "MR450GLASS-G",      name: "מריוובוקס זכוכית עומק 45 גרפיט",         priceNagar: 245, priceSocher: 220, unit: "יח'" },
+      { id: "MR500GLASS-W",      name: "מריוובוקס זכוכית עומק 50 לבן",           priceNagar: 245, priceSocher: 220, unit: "יח'" },
+      { id: "MR500GLASS-G",      name: "מריוובוקס זכוכית עומק 50 גרפיט",         priceNagar: 245, priceSocher: 220, unit: "יח'" },
+      { id: "MR550GLASS-W",      name: "מריוובוקס זכוכית עומק 55 לבן",           priceNagar: 255, priceSocher: 230, unit: "יח'" },
+      { id: "MR550GLASS-G",      name: "מריוובוקס זכוכית עומק 55 גרפיט",         priceNagar: 255, priceSocher: 230, unit: "יח'" },
+      { id: "MR500GLASS-W-70KG", name: "מריוובוקס זכוכית עומק 50 לבן — 70kg",   priceNagar: 270, priceSocher: 245, unit: "יח'" },
+      { id: "MR500GLASS-G-70KG", name: "מריוובוקס זכוכית עומק 50 גרפיט — 70kg", priceNagar: 270, priceSocher: 245, unit: "יח'" },
+      { id: "MR550GLASS-W-70KG", name: "מריוובוקס זכוכית עומק 55 לבן — 70kg",   priceNagar: 280, priceSocher: 255, unit: "יח'" },
+      { id: "MR550GLASS-G-70KG", name: "מריוובוקס זכוכית עומק 55 גרפיט — 70kg", priceNagar: 280, priceSocher: 255, unit: "יח'" },
+    ]
+  },
+  {
+    id: "merivo-accessories", name: "מריוו — אביזרים נלווים", icon: "🔩",
+    dualPrice: true,
+    products: [
+      { id: "ZI4.4ES1OG",    name: "מתאם לחזית זכוכית MERIVO גרפיט",        priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.4ES1SW",    name: "מתאם לחזית זכוכית MERIVO לבן",          priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.2ES1OG",    name: "מתאם לחזית מוט מקשר MERIVO גרפיט",     priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.2ES1SW",    name: "מתאם לחזית מוט מקשר MERIVO לבן",       priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZI4.0MS1OG",    name: "מתאם לחזית נמוכה MERIVO גרפיט",        priceNagar: 100, priceSocher: 100, unit: "יח'" },
+      { id: "ZI4.0MS1SW",    name: "מתאם לחזית נמוכה MERIVO לבן",          priceNagar: 100, priceSocher: 100, unit: "יח'" },
+      { id: "ZV4.1042NNOG",  name: "פרופיל חזית זכוכית מריוובוקס גרפיט",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZV4.1042NNSW",  name: "פרופיל חזית זכוכית מריוובוקס לבן",     priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZV4.1042MOG",   name: "פרופיל חזית פנימית מריוובוקס גרפיט",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZV4.1042MSW",   name: "פרופיל חזית פנימית מריוובוקס לבן",     priceNagar: 124, priceSocher: 124, unit: "יח'" },
+      { id: "ZE4H1058G.KL",  name: "חזית זכוכית MERIVOBOX",                priceNagar: 100, priceSocher: 100, unit: "יח'" },
+      { id: "ZR4.1059UOG-M", name: "מוט מקשר MERIVOBOX גרפיט",            priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
+      { id: "ZR4.1059USW-M", name: "מוט מקשר MERIVOBOX לבן",              priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
+    ]
+  },
+];
+
 const CATALOG = [
+  ...MERIVO_CATALOG,
   {
     id: "white-c", name: "לבן — דופן C", icon: "⬜",
     products: [
@@ -214,8 +305,8 @@ function applyDiscount(price, discount) {
 function parseCSV(text) {
   const lines = text.trim().split("\n").slice(1);
   return lines.map(line => {
-    const [phone, name, discount] = line.split(",").map(s => s.trim().replace(/"/g, ""));
-    return { phone, name, discount: parseFloat(discount) || 0 };
+    const [phone, name, discount, type] = line.split(",").map(s => s.trim().replace(/"/g, ""));
+    return { phone, name, discount: parseFloat(discount) || 0, type: type || "נגר" };
   });
 }
 
@@ -259,13 +350,19 @@ export default function App() {
   };
 
   const discount = customer?.discount || 0;
-  const getPrice = (price) => applyDiscount(price, discount);
+  const getPrice = (p, cat) => {
+    let basePrice = p.price;
+    if (cat && cat.dualPrice) {
+      basePrice = customer?.type === "סוחר" ? p.priceSocher : p.priceNagar;
+    }
+    return applyDiscount(basePrice, discount);
+  };
 
   const cartCount = Object.values(cart).reduce((s, q) => s + q, 0);
   const cartTotal = CATALOG.flatMap(c => c.products)
-    .reduce((s, p) => s + (cart[p.id] || 0) * getPrice(p.price), 0);
+    .reduce((s, p) => s + (cart[p.id] || 0) * getPrice(p, CATALOG.find(c2 => c2.products.some(p2 => p2.id === p.id))), 0);
   const cartItems = CATALOG.flatMap(c =>
-    c.products.filter(p => cart[p.id]).map(p => ({ ...p, qty: cart[p.id], cat: c.name, finalPrice: getPrice(p.price) }))
+    c.products.filter(p => cart[p.id]).map(p => ({ ...p, qty: cart[p.id], cat: c.name, finalPrice: getPrice(p, c) }))
   );
 
   const setQty = (pid, delta) => {
@@ -402,7 +499,7 @@ export default function App() {
             <div style={{display:"flex",flexDirection:"column",gap:9,marginBottom:18}}>
               {cat.products.map(p => {
                 const qty = cart[p.id]||0;
-                const finalPrice = getPrice(p.price);
+                const finalPrice = getPrice(p, cat);
                 return (
                   <div key={p.id} style={{background:"#fff",border:`1.5px solid ${qty>0?"#d4a017":"#e8e8e8"}`,borderRadius:11,padding:"12px 14px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                     <div style={{flex:1}}>
