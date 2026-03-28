@@ -107,7 +107,7 @@ const MERIVO_CATALOG = [
       { id: "ZI4.0MS1OG",    name: "מתאם לחזית נמוכה MERIVO גרפיט",     priceNagar: 45,  priceSocher: 40,  unit: "יח'" },
       { id: "ZV4.1042NNOG",  name: "פרופיל חזית זכוכית מריוובוקס גרפיט",priceNagar: 65,  priceSocher: 62,  unit: "יח'" },
       { id: "ZV4.1042MOG",   name: "פרופיל חזית פנימית מריוובוקס גרפיט",priceNagar: 65,  priceSocher: 62,  unit: "יח'" },
-      { id: "ZE4H1058G.KL-G",name: "חזית זכוכית MERIVOBOX גרפיט",       priceNagar: 35,  priceSocher: 35,  unit: "יח'" },
+      { id: "ZE4H1058G.KL",  name: "חזית זכוכית MERIVOBOX",             priceNagar: 35,  priceSocher: 35,  unit: "יח'" },
       { id: "ZR4.1059UOG-M", name: "מוט מקשר MERIVOBOX גרפיט",          priceNagar: 28,  priceSocher: 25,  unit: "יח'" },
     ]
   },
