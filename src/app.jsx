@@ -345,6 +345,8 @@ export default function App() {
   const [activeCat, setActiveCat] = useState(null);
   const [cart, setCart] = useState({});
   const [notes, setNotes] = useState("");
+  const [expando, setExpando] = useState(false);
+  const [inserta, setInserta] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [agent, setAgent] = useState(null);
   const [customer, setCustomer] = useState(null);
@@ -408,6 +410,8 @@ export default function App() {
       `👤 *לקוח:* ${customer?.name || phoneInput}`,
       `📞 *טלפון:* ${phoneInput}`,
       agent ? `🧑‍💼 *סוכן:* ${agent.name}` : ``,
+      expando ? `📦 *EXPANDO:* כן` : ``,
+      inserta ? `📦 *INSERTA:* כן` : ``,
       ``, `*פריטים:*`,
       ...cartItems.map(p => `• מק"ט: ${p.id} | ${p.name}  ×${p.qty}  ₪${(p.finalPrice * p.qty).toLocaleString("he-IL")}`),
       ``, `💰 *סה"כ: ₪${cartTotal.toLocaleString("he-IL")}*`,
@@ -530,8 +534,32 @@ export default function App() {
                 );
               })}
             </div>
+            {activeBrand === "legrabox" && (
+              <div style={{background:"#fff",border:"1.5px solid #e8e8e8",borderRadius:10,padding:"14px 16px",marginTop:12,display:"flex",alignItems:"center",gap:12,cursor:"pointer"}}
+                onClick={() => setExpando(e => !e)}>
+                <div style={{width:22,height:22,borderRadius:5,border:`2px solid ${expando?"#1c1c1c":"#ccc"}`,background:expando?"#1c1c1c":"#fff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,transition:"all 0.15s"}}>
+                  {expando && <span style={{color:"#fff",fontSize:"0.85rem",fontWeight:700}}>✓</span>}
+                </div>
+                <div>
+                  <div style={{fontWeight:600,fontSize:"0.92rem"}}>EXPANDO</div>
+                  <div style={{fontSize:"0.76rem",color:"#aaa",marginTop:2}}>סמן אם ההזמנה כוללת EXPANDO</div>
+                </div>
+              </div>
+            )}
+            {activeBrand === "merivobox" && (
+              <div style={{background:"#fff",border:"1.5px solid #e8e8e8",borderRadius:10,padding:"14px 16px",marginTop:12,display:"flex",alignItems:"center",gap:12,cursor:"pointer"}}
+                onClick={() => setInserta(e => !e)}>
+                <div style={{width:22,height:22,borderRadius:5,border:`2px solid ${inserta?"#1c1c1c":"#ccc"}`,background:inserta?"#1c1c1c":"#fff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,transition:"all 0.15s"}}>
+                  {inserta && <span style={{color:"#fff",fontSize:"0.85rem",fontWeight:700}}>✓</span>}
+                </div>
+                <div>
+                  <div style={{fontWeight:600,fontSize:"0.92rem"}}>INSERTA</div>
+                  <div style={{fontSize:"0.76rem",color:"#aaa",marginTop:2}}>סמן אם ההזמנה כוללת INSERTA</div>
+                </div>
+              </div>
+            )}
             {cartCount > 0 && (
-              <button onClick={() => setStep(4)} style={{width:"100%",marginTop:16,background:"#1c1c1c",color:"#fff",border:"none",borderRadius:9,padding:"13px",fontFamily:"inherit",fontSize:"0.95rem",fontWeight:700,cursor:"pointer"}}>
+              <button onClick={() => setStep(4)} style={{width:"100%",marginTop:12,background:"#1c1c1c",color:"#fff",border:"none",borderRadius:9,padding:"13px",fontFamily:"inherit",fontSize:"0.95rem",fontWeight:700,cursor:"pointer"}}>
                 לסיכום ({cartCount} פריטים) →
               </button>
             )}
@@ -603,6 +631,18 @@ export default function App() {
                     </div>
                   </div>
                 ))}
+                {expando && (
+                  <div style={{padding:"10px 14px",borderBottom:"1px solid #f0f0f0",display:"flex",alignItems:"center",gap:8,background:"#f0f4ff"}}>
+                    <span style={{fontSize:"0.85rem",fontWeight:600}}>📦 EXPANDO</span>
+                    <span style={{fontSize:"0.78rem",color:"#555",marginRight:"auto"}}>כלול בהזמנה</span>
+                  </div>
+                )}
+                {inserta && (
+                  <div style={{padding:"10px 14px",borderBottom:"1px solid #f0f0f0",display:"flex",alignItems:"center",gap:8,background:"#f0f4ff"}}>
+                    <span style={{fontSize:"0.85rem",fontWeight:600}}>📦 INSERTA</span>
+                    <span style={{fontSize:"0.78rem",color:"#555",marginRight:"auto"}}>כלול בהזמנה</span>
+                  </div>
+                )}
                 <div style={{background:"#f9f6ef",padding:"12px 14px",display:"flex",justifyContent:"space-between",fontWeight:700,fontSize:"1rem"}}>
                   <span>סה"כ נטו</span>
                   <span style={{color:"#d4a017"}}>₪{cartTotal.toLocaleString("he-IL")}</span>
