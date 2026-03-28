@@ -291,23 +291,29 @@ const LEGRABOX_CATALOG = [
     ]
   },
   {
-    id: "lg-accessories", name: "אביזרים וחזיתות", icon: "🔩",
+    id: "lg-accessories-white", name: "לבן — אביזרים וחזיתות", icon: "⬜",
     products: [
-      { id: "ZV7.1043C01-OGM", name: "פרופיל לחזית גרפיט LEGRABOX", price: 124, unit: "יח'" },
-      { id: "Zi7.0Ks0-OGM", name: "זוג מתאם לחזית K גרפיט LEGRABOX", price: 126, unit: "יח'" },
-      { id: "ZV7.1043C01-SW-M", name: "פרופיל לחזית לבן LEGRABOX", price: 124, unit: "יח'" },
-      { id: "Zi7.0Ks0-SW-M", name: "מתאם לחזית K לבן LEGRABOX", price: 126, unit: "יח'" },
-      { id: "Zi7.0Ms0-OGM", name: "זוג מתאמים לחזית M גרפיט LEGRABOX", price: 110, unit: "יח'" },
-      { id: "Zi7.0Ms0-SW-M", name: "מתאם לחזית M לבן LEGRABOX", price: 110, unit: "יח'" },
-      { id: "ZV7.1043MNI-OGM", name: "פרופיל לחזית זכוכית גרפיט LEGRABOX", price: 120, unit: "יח'" },
-      { id: "Zi7.2Cs0-OGM", name: "זוג מתאם לחזית זכוכית C גרפיט", price: 165, unit: "יח'" },
-      { id: "ZV7.1043MNI-SW-M", name: "פרופיל לחזית זכוכית לבן LEGRABOX", price: 120, unit: "יח'" },
-      { id: "Zi7.2Cs0-SW-M", name: "מתאם לחזית זכוכית C לבן LEGRABOX", price: 165, unit: "יח'" },
-      { id: "ZE7W1100G", name: "חזית זכוכית LEGRABOX 1100×138×10mm", price: 73, unit: "יח'" },
-      { id: "Zi7.3Cs0-OGM", name: "מתאם לחזית גלריה C גרפיט LEGRABOX", price: 165, unit: "יח'" },
-      { id: "ZR7.1080U-OGM", name: "מוט מקשר גרפיט LEGRABOX", price: 47, unit: "יח'" },
-      { id: "Zi7.3Cs0-SW-M", name: "מתאם לחזית גלריה C לבן LEGRABOX", price: 165, unit: "יח'" },
-      { id: "ZR7.1080U-SW-M", name: "מוט מקשר לבן LEGRABOX", price: 47, unit: "יח'" },
+      { id: "ZV7.1043C01-SW-M", name: "פרופיל לחזית לבן LEGRABOX",           price: 124, unit: "יח'" },
+      { id: "Zi7.0Ks0-SW-M",   name: "מתאם לחזית K לבן LEGRABOX",           price: 126, unit: "יח'" },
+      { id: "Zi7.0Ms0-SW-M",   name: "מתאם לחזית M לבן LEGRABOX",           price: 110, unit: "יח'" },
+      { id: "ZV7.1043MNI-SW-M",name: "פרופיל לחזית זכוכית לבן LEGRABOX",   price: 120, unit: "יח'" },
+      { id: "Zi7.2Cs0-SW-M",   name: "מתאם לחזית זכוכית C לבן LEGRABOX",   price: 165, unit: "יח'" },
+      { id: "ZE7W1100G-SW",    name: "חזית זכוכית LEGRABOX 1100×138×10mm",  price: 73,  unit: "יח'" },
+      { id: "Zi7.3Cs0-SW-M",   name: "מתאם לחזית גלריה C לבן LEGRABOX",    price: 165, unit: "יח'" },
+      { id: "ZR7.1080U-SW-M",  name: "מוט מקשר לבן LEGRABOX",               price: 47,  unit: "יח'" },
+    ]
+  },
+  {
+    id: "lg-accessories-graphite", name: "גרפיט — אביזרים וחזיתות", icon: "⬛",
+    products: [
+      { id: "ZV7.1043C01-OGM", name: "פרופיל לחזית גרפיט LEGRABOX",          price: 124, unit: "יח'" },
+      { id: "Zi7.0Ks0-OGM",   name: "זוג מתאם לחזית K גרפיט LEGRABOX",     price: 126, unit: "יח'" },
+      { id: "Zi7.0Ms0-OGM",   name: "זוג מתאמים לחזית M גרפיט LEGRABOX",   price: 110, unit: "יח'" },
+      { id: "ZV7.1043MNI-OGM",name: "פרופיל לחזית זכוכית גרפיט LEGRABOX",  price: 120, unit: "יח'" },
+      { id: "Zi7.2Cs0-OGM",   name: "זוג מתאם לחזית זכוכית C גרפיט",      price: 165, unit: "יח'" },
+      { id: "ZE7W1100G-OGM",  name: "חזית זכוכית LEGRABOX 1100×138×10mm",  price: 73,  unit: "יח'" },
+      { id: "Zi7.3Cs0-OGM",   name: "מתאם לחזית גלריה C גרפיט LEGRABOX",  price: 165, unit: "יח'" },
+      { id: "ZR7.1080U-OGM",  name: "מוט מקשר גרפיט LEGRABOX",             price: 47,  unit: "יח'" },
     ]
   },
 ];
