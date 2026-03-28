@@ -654,6 +654,30 @@ export default function App() {
                 <span onClick={() => setStep(1)} style={{color:"#d4a017",cursor:"pointer",fontWeight:600}}>חזור לבחור מוצרים</span>
               </div>
             )}
+            {cartItems.some(p => p.cat && LEGRABOX_CATALOG.some(c => c.id === p.cat.id)) && (
+              <div style={{background:"#fff",border:"1.5px solid #e8e8e8",borderRadius:10,padding:"14px 16px",marginBottom:12,display:"flex",alignItems:"center",gap:12,cursor:"pointer"}}
+                onClick={() => setExpando(e => !e)}>
+                <div style={{width:22,height:22,borderRadius:5,border:`2px solid ${expando?"#1c1c1c":"#ccc"}`,background:expando?"#1c1c1c":"#fff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,transition:"all 0.15s"}}>
+                  {expando && <span style={{color:"#fff",fontSize:"0.85rem",fontWeight:700}}>✓</span>}
+                </div>
+                <div>
+                  <div style={{fontWeight:600,fontSize:"0.92rem"}}>EXPANDO</div>
+                  <div style={{fontSize:"0.76rem",color:"#aaa",marginTop:2}}>סמן אם ההזמנה כוללת EXPANDO</div>
+                </div>
+              </div>
+            )}
+            {cartItems.some(p => p.cat && MERIVO_CATALOG.some(c => c.id === p.cat.id)) && (
+              <div style={{background:"#fff",border:"1.5px solid #e8e8e8",borderRadius:10,padding:"14px 16px",marginBottom:12,display:"flex",alignItems:"center",gap:12,cursor:"pointer"}}
+                onClick={() => setInserta(e => !e)}>
+                <div style={{width:22,height:22,borderRadius:5,border:`2px solid ${inserta?"#1c1c1c":"#ccc"}`,background:inserta?"#1c1c1c":"#fff",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,transition:"all 0.15s"}}>
+                  {inserta && <span style={{color:"#fff",fontSize:"0.85rem",fontWeight:700}}>✓</span>}
+                </div>
+                <div>
+                  <div style={{fontWeight:600,fontSize:"0.92rem"}}>INSERTA</div>
+                  <div style={{fontSize:"0.76rem",color:"#aaa",marginTop:2}}>סמן אם ההזמנה כוללת INSERTA</div>
+                </div>
+              </div>
+            )}
             <div style={{marginBottom:16}}>
               <label style={{display:"block",fontSize:"0.76rem",fontWeight:700,color:"#aaa",marginBottom:5}}>הערות (אופציונלי)</label>
               <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="מק״ט ספציפי, כמות מיוחדת, הוראות..."
