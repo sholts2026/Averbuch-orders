@@ -49,6 +49,7 @@ const MERIVO_CATALOG = [
     id: "merivo-metal-white", name: "לבן — דופן מתכת כפולה", icon: "⬜", dualPrice: true,
     products: [
       { id: "MR400-P-W",      name: "מריוובוקס מתכת עומק 40 לבן",         priceNagar: 225, priceSocher: 210, unit: "יח'" },
+      { id: "MR450-P-W",      name: "מריוובוקס מתכת עומק 45 לבן",         priceNagar: 225, priceSocher: 210, unit: "יח'" },
       { id: "MR500-P-W",      name: "מריוובוקס מתכת עומק 50 לבן",         priceNagar: 225, priceSocher: 210, unit: "יח'" },
       { id: "MR550-P-W",      name: "מריוובוקס מתכת עומק 55 לבן",         priceNagar: 230, priceSocher: 220, unit: "יח'" },
       { id: "MR500-P-W-70KG", name: "מריוובוקס מתכת עומק 50 לבן — 70kg", priceNagar: 250, priceSocher: 245, unit: "יח'" },
@@ -89,24 +90,24 @@ const MERIVO_CATALOG = [
   {
     id: "merivo-accessories-white", name: "לבן — אביזרים נלווים", icon: "🔩", dualPrice: true,
     products: [
-      { id: "ZI4.4ES1SW",    name: "מתאם לחזית זכוכית MERIVO לבן",        priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.2ES1SW",    name: "מתאם לחזית מוט מקשר MERIVO לבן",     priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.0MS1SW",    name: "מתאם לחזית נמוכה MERIVO לבן",        priceNagar: 100, priceSocher: 100, unit: "יח'" },
-      { id: "ZV4.1042NNSW",  name: "פרופיל חזית זכוכית מריוובוקס לבן",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZV4.1042MSW",   name: "פרופיל חזית פנימית מריוובוקס לבן",   priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZE4H1058G.KL",  name: "חזית זכוכית MERIVOBOX",              priceNagar: 100, priceSocher: 100, unit: "יח'" },
-      { id: "ZR4.1059USW-M", name: "מוט מקשר MERIVOBOX לבן",            priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
+      { id: "ZI4.4ES1SW",    name: "מתאם לחזית זכוכית MERIVO לבן",       priceNagar: 120, priceSocher: 120, unit: "יח'" },
+      { id: "ZI4.2ES1SW",    name: "מתאם לחזית מוט מקשר MERIVO לבן",    priceNagar: 120, priceSocher: 120, unit: "יח'" },
+      { id: "ZI4.0MS1SW",    name: "מתאם לחזית נמוכה MERIVO לבן",       priceNagar: 80,  priceSocher: 80,  unit: "יח'" },
+      { id: "ZV4.1042NNSW",  name: "פרופיל חזית זכוכית מריוובוקס לבן",  priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZV4.1042MSW",   name: "פרופיל חזית פנימית מריוובוקס לבן",  priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZE4H1058G.KL",  name: "חזית זכוכית MERIVOBOX",             priceNagar: 70,  priceSocher: 70,  unit: "יח'" },
+      { id: "ZR4.1059USW-M", name: "מוט מקשר MERIVOBOX לבן",           priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
     ]
   },
   {
     id: "merivo-accessories-graphite", name: "גרפיט — אביזרים נלווים", icon: "🔩", dualPrice: true,
     products: [
-      { id: "ZI4.4ES1OG",    name: "מתאם לחזית זכוכית MERIVO גרפיט",      priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.2ES1OG",    name: "מתאם לחזית מוט מקשר MERIVO גרפיט",   priceNagar: 140, priceSocher: 140, unit: "יח'" },
-      { id: "ZI4.0MS1OG",    name: "מתאם לחזית נמוכה MERIVO גרפיט",      priceNagar: 100, priceSocher: 100, unit: "יח'" },
-      { id: "ZV4.1042NNOG",  name: "פרופיל חזית זכוכית מריוובוקס גרפיט", priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZV4.1042MOG",   name: "פרופיל חזית פנימית מריוובוקס גרפיט", priceNagar: 124, priceSocher: 124, unit: "יח'" },
-      { id: "ZR4.1059UOG-M", name: "מוט מקשר MERIVOBOX גרפיט",          priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
+      { id: "ZI4.4ES1OG",    name: "מתאם לחזית זכוכית MERIVO גרפיט",     priceNagar: 120, priceSocher: 120, unit: "יח'" },
+      { id: "ZI4.2ES1OG",    name: "מתאם לחזית מוט מקשר MERIVO גרפיט",  priceNagar: 120, priceSocher: 120, unit: "יח'" },
+      { id: "ZI4.0MS1OG",    name: "מתאם לחזית נמוכה MERIVO גרפיט",     priceNagar: 80,  priceSocher: 80,  unit: "יח'" },
+      { id: "ZV4.1042NNOG",  name: "פרופיל חזית זכוכית מריוובוקס גרפיט",priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZV4.1042MOG",   name: "פרופיל חזית פנימית מריוובוקס גרפיט",priceNagar: 140, priceSocher: 140, unit: "יח'" },
+      { id: "ZR4.1059UOG-M", name: "מוט מקשר MERIVOBOX גרפיט",         priceNagar: 50,  priceSocher: 25,  unit: "יח'" },
     ]
   },
 ];
