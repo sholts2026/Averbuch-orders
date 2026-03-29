@@ -401,7 +401,7 @@ export default function App() {
       `👤 *לקוח:* ${nameInput}`,
       phoneInput ? `📞 *טלפון:* ${phoneInput}` : ``,
       agent ? `🧑‍💼 *סוכן:* ${agent.name}` : ``,
-      customerType ? `🏷️ *סוג:* ${customerType}` : ``,
+      customerType ? `🏷️ *סוג:* ${customerType === "סוחר" ? "S" : "N"}` : ``,
       expando ? `📦 *EXPANDO:* כן` : ``,
       inserta ? `📦 *INSERTA:* כן` : ``,
       ``, `*פריטים:*`,
