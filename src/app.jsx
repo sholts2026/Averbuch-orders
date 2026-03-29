@@ -464,7 +464,7 @@ export default function App() {
                   <div style={{fontSize:"2.5rem",marginBottom:8}}>🔩</div>
                   <h2 style={{fontSize:"1.3rem",fontWeight:700,marginBottom:4}}>אברבוך פרזול</h2>
                   <div style={{display:"inline-block",background:customerType==="סוחר"?"#e8f5e9":"#fff8e1",color:customerType==="סוחר"?"#2e7d32":"#b8860b",borderRadius:20,padding:"3px 14px",fontSize:"0.82rem",fontWeight:700,marginBottom:4}}>
-                    מחירי {customerType}
+                    {customerType==="סוחר" ? "S" : "N"}
                   </div>
                   <p style={{color:"#888",fontSize:"0.85rem",marginTop:6}}>הכנס את פרטיך כדי להמשיך</p>
                 </div>
