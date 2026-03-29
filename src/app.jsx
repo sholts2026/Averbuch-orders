@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-const SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTUMzCB6SQxSxoaB_yWphf4M7frk78IHxjAJJZixVrVziUxS8qEQcwjLeCcI1Rw7WUnMqoy9snxyWa0/pub?gid=0&single=true&output=csv";
-
 const MERIVO_CATALOG = [
   {
     id: "merivo-m-white", name: "לבן — מגירה נמוכה M", icon: "⬜", dualPrice: true,
@@ -327,18 +325,6 @@ const AGENTS = [
   { id: "shani", name: "שני", phone: "972538377364" },
 ];
 
-function applyDiscount(price, discount) {
-  return Math.round(price * (1 - discount / 100));
-}
-
-function parseCSV(text) {
-  const lines = text.trim().split("\n").slice(1);
-  return lines.map(line => {
-    const [phone, name, discount, type] = line.split(",").map(s => s.trim().replace(/"/g, ""));
-    return { phone, name, discount: parseFloat(discount) || 0, type: type || "נגר" };
-  });
-}
-
 export default function App() {
   const [step, setStep] = useState(0);
   const [activeBrand, setActiveBrand] = useState(null);
@@ -349,42 +335,32 @@ export default function App() {
   const [inserta, setInserta] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [agent, setAgent] = useState(null);
-  const [customer, setCustomer] = useState(null);
+  const [customerType, setCustomerType] = useState(null); // "נגר" | "סוחר"
+  const [nameInput, setNameInput] = useState("");
   const [phoneInput, setPhoneInput] = useState("");
-  const [loginError, setLoginError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [customers, setCustomers] = useState([]);
+  const [nameError, setNameError] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const found = AGENTS.find(a => a.id === params.get("agent"));
-    setAgent(found || null);
-    fetch(SHEET_CSV)
-      .then(r => r.text())
-      .then(text => setCustomers(parseCSV(text)))
-      .catch(() => {});
+    const foundAgent = AGENTS.find(a => a.id === params.get("agent"));
+    setAgent(foundAgent || null);
+    const t = params.get("type");
+    if (t === "nagar") setCustomerType("נגר");
+    else if (t === "socher") setCustomerType("סוחר");
+    else setCustomerType(null);
   }, []);
 
-  const login = () => {
-    setLoading(true);
-    setLoginError("");
-    const clean = phoneInput.replace(/[-\s]/g, "");
-    const found = customers.find(c => c.phone.replace(/[-\s]/g, "") === clean);
-    setTimeout(() => {
-      setLoading(false);
-      if (found) { setCustomer(found); setStep(1); }
-      else setLoginError("מספר הטלפון לא נמצא במערכת. פנה לסוכן שלך.");
-    }, 800);
+  const enter = () => {
+    if (!nameInput.trim()) { setNameError("יש להזין שם"); return; }
+    setNameError("");
+    setStep(1);
   };
-
-  const discount = customer?.discount || 0;
-  const customerType = customer?.type || "נגר";
 
   const getPrice = (p, cat) => {
     if (cat && cat.dualPrice) {
       return customerType === "סוחר" ? p.priceSocher : p.priceNagar;
     }
-    return applyDiscount(p.price, discount);
+    return p.price;
   };
 
   const allProducts = BRANDS.flatMap(b => b.subCategories.flatMap(c => c.products.map(p => ({ ...p, cat: c }))));
@@ -407,9 +383,10 @@ export default function App() {
     const phone = agent?.phone || "972538377364";
     const lines = [
       `🔩 *הזמנה חדשה – אברבוך פרזול*`, ``,
-      `👤 *לקוח:* ${customer?.name || phoneInput}`,
-      `📞 *טלפון:* ${phoneInput}`,
+      `👤 *לקוח:* ${nameInput}`,
+      phoneInput ? `📞 *טלפון:* ${phoneInput}` : ``,
       agent ? `🧑‍💼 *סוכן:* ${agent.name}` : ``,
+      customerType ? `🏷️ *סוג:* ${customerType}` : ``,
       expando ? `📦 *EXPANDO:* כן` : ``,
       inserta ? `📦 *INSERTA:* כן` : ``,
       ``, `*פריטים:*`,
@@ -429,7 +406,7 @@ export default function App() {
       <div style={{background:"#fff",borderRadius:16,padding:"40px 28px",maxWidth:400,width:"100%",textAlign:"center",boxShadow:"0 4px 24px rgba(0,0,0,0.1)"}}>
         <div style={{fontSize:"3rem",marginBottom:12}}>✅</div>
         <h2 style={{marginBottom:8}}>ההזמנה נשלחה!</h2>
-        <p style={{color:"#666",marginBottom:20}}>תודה {customer?.name}! נחזור אליך בקרוב.</p>
+        <p style={{color:"#666",marginBottom:20}}>תודה {nameInput}! נחזור אליך בקרוב.</p>
         <div style={{background:"#f5f5f0",borderRadius:10,padding:16,textAlign:"right"}}>
           {cartItems.map(p => (
             <div key={p.id} style={{display:"flex",justifyContent:"space-between",fontSize:"0.88rem",padding:"3px 0"}}>
@@ -448,7 +425,7 @@ export default function App() {
   return (
     <div style={{fontFamily:"sans-serif",direction:"rtl",background:"#f5f5f0",minHeight:"100vh"}}>
       <div style={{background:"#1c1c1c",color:"#fff",padding:"0 16px",height:52,display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:50}}>
-        <span style={{fontWeight:700}}>🔩 אברבוך פרזול {customer && <span style={{fontSize:"0.75rem",opacity:0.7}}>· {customer.name}</span>}</span>
+        <span style={{fontWeight:700}}>🔩 אברבוך פרזול {nameInput && <span style={{fontSize:"0.75rem",opacity:0.7}}>· {nameInput}</span>}</span>
         {cartCount > 0 && step > 1 && (
           <div onClick={() => setStep(4)} style={{background:"#d4a017",color:"#1c1c1c",borderRadius:20,padding:"4px 12px",cursor:"pointer",fontWeight:700,fontSize:"0.85rem"}}>
             🛒 {cartCount} · ₪{cartTotal.toLocaleString("he-IL")}
@@ -458,26 +435,45 @@ export default function App() {
 
       <div style={{maxWidth:620,margin:"0 auto",padding:"20px 14px 80px"}}>
 
-        {/* STEP 0 — התחברות */}
+        {/* STEP 0 — פרטי לקוח */}
         {step === 0 && (
           <div style={{maxWidth:380,margin:"40px auto"}}>
-            <div style={{textAlign:"center",marginBottom:28}}>
-              <div style={{fontSize:"2.5rem",marginBottom:8}}>🔩</div>
-              <h2 style={{fontSize:"1.3rem",fontWeight:700,marginBottom:6}}>אברבוך פרזול</h2>
-              <p style={{color:"#888",fontSize:"0.9rem"}}>הכנס את מספר הטלפון שלך כדי להתחבר</p>
-            </div>
-            <div style={{background:"#fff",borderRadius:12,padding:24,boxShadow:"0 2px 12px rgba(0,0,0,0.08)"}}>
-              <label style={{display:"block",fontSize:"0.82rem",fontWeight:700,color:"#aaa",marginBottom:6}}>מספר טלפון</label>
-              <input value={phoneInput} onChange={e => setPhoneInput(e.target.value)}
-                onKeyDown={e => e.key==="Enter" && login()}
-                placeholder="050-0000000" type="tel"
-                style={{width:"100%",border:"1.5px solid #e8e8e8",borderRadius:8,padding:"11px 13px",fontFamily:"inherit",fontSize:"1rem",outline:"none",direction:"rtl",marginBottom:12,boxSizing:"border-box"}} />
-              {loginError && <div style={{color:"#e53935",fontSize:"0.82rem",marginBottom:10}}>{loginError}</div>}
-              <button onClick={login} disabled={loading||!phoneInput}
-                style={{width:"100%",background:loading||!phoneInput?"#ccc":"#1c1c1c",color:"#fff",border:"none",borderRadius:8,padding:"12px",fontFamily:"inherit",fontSize:"1rem",fontWeight:700,cursor:loading||!phoneInput?"default":"pointer"}}>
-                {loading ? "מחפש..." : "כניסה →"}
-              </button>
-            </div>
+            {/* לינק לא תקין */}
+            {(!agent || !customerType) ? (
+              <div style={{textAlign:"center",padding:"60px 20px"}}>
+                <div style={{fontSize:"2.5rem",marginBottom:12}}>⚠️</div>
+                <h2 style={{fontSize:"1.1rem",fontWeight:700,marginBottom:8}}>לינק לא תקין</h2>
+                <p style={{color:"#888",fontSize:"0.88rem"}}>פנה לסוכן שלך לקבלת הלינק הנכון</p>
+              </div>
+            ) : (
+              <>
+                <div style={{textAlign:"center",marginBottom:24}}>
+                  <div style={{fontSize:"2.5rem",marginBottom:8}}>🔩</div>
+                  <h2 style={{fontSize:"1.3rem",fontWeight:700,marginBottom:4}}>אברבוך פרזול</h2>
+                  <div style={{display:"inline-block",background:customerType==="סוחר"?"#e8f5e9":"#fff8e1",color:customerType==="סוחר"?"#2e7d32":"#b8860b",borderRadius:20,padding:"3px 14px",fontSize:"0.82rem",fontWeight:700,marginBottom:4}}>
+                    מחירי {customerType}
+                  </div>
+                  <p style={{color:"#888",fontSize:"0.85rem",marginTop:6}}>הכנס את פרטיך כדי להמשיך</p>
+                </div>
+                <div style={{background:"#fff",borderRadius:12,padding:24,boxShadow:"0 2px 12px rgba(0,0,0,0.08)"}}>
+                  <label style={{display:"block",fontSize:"0.82rem",fontWeight:700,color:"#aaa",marginBottom:6}}>שם מלא *</label>
+                  <input value={nameInput} onChange={e => { setNameInput(e.target.value); setNameError(""); }}
+                    onKeyDown={e => e.key==="Enter" && enter()}
+                    placeholder="ישראל ישראלי"
+                    style={{width:"100%",border:`1.5px solid ${nameError?"#e53935":"#e8e8e8"}`,borderRadius:8,padding:"11px 13px",fontFamily:"inherit",fontSize:"1rem",outline:"none",direction:"rtl",marginBottom:nameError?4:12,boxSizing:"border-box"}} />
+                  {nameError && <div style={{color:"#e53935",fontSize:"0.78rem",marginBottom:10}}>{nameError}</div>}
+                  <label style={{display:"block",fontSize:"0.82rem",fontWeight:700,color:"#aaa",marginBottom:6}}>טלפון (אופציונלי)</label>
+                  <input value={phoneInput} onChange={e => setPhoneInput(e.target.value)}
+                    onKeyDown={e => e.key==="Enter" && enter()}
+                    placeholder="050-0000000" type="tel"
+                    style={{width:"100%",border:"1.5px solid #e8e8e8",borderRadius:8,padding:"11px 13px",fontFamily:"inherit",fontSize:"1rem",outline:"none",direction:"rtl",marginBottom:16,boxSizing:"border-box"}} />
+                  <button onClick={enter} disabled={!nameInput.trim()}
+                    style={{width:"100%",background:!nameInput.trim()?"#ccc":"#1c1c1c",color:"#fff",border:"none",borderRadius:8,padding:"12px",fontFamily:"inherit",fontSize:"1rem",fontWeight:700,cursor:!nameInput.trim()?"default":"pointer",transition:"background 0.15s"}}>
+                    כניסה לקטלוג →
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         )}
 
