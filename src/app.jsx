@@ -521,7 +521,7 @@ export default function App() {
     if (cat && cat.dualPrice) {
       return customerType === "סוחר" ? p.priceSocher : p.priceNagar;
     }
-    return customerType === "סוחר" ? Math.round(p.price * 0.55) : Math.round(p.price * 0.65);
+    return customerType === "סוחר" ? Math.round(p.price * 0.5) : Math.round(p.price * 0.5);
   };
 
   const allProducts = BRANDS.flatMap(b => b.subCategories.flatMap(c => c.products.map(p => ({ ...p, cat: c }))));
